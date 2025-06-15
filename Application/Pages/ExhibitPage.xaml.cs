@@ -149,16 +149,13 @@ public partial class ExhibitPage : ContentPage
     {
         try
         {
-            //message += "\n";
-            //byte[] buffer = Encoding.UTF8.GetBytes(message);
-            await ExhibitionManager.Instance.SendDataAsync(message);
-
-            //await ExhibitionManager.Instance.socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+            message += "\n";
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            await ExhibitionManager.Instance.socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
         }
-        catch (Exception ex)
+        catch
         {
-            await DisplayAlert("Ошибка", $"Ошибка отправки данных: {ex.Message}", "ОК");
-
+            await DisplayAlert("Ошибка", "Произошла ошибка при отправлении данных", "ОК");
         }
     }
 
