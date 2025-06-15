@@ -38,13 +38,15 @@ public partial class Settings : ContentPage
     {
         try
         {
-            message += "\n";
-            byte[] buffer = Encoding.UTF8.GetBytes(message);
-            await ExhibitionManager.Instance.socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+            //message += "\n";
+            //byte[] buffer = Encoding.UTF8.GetBytes(message);
+            await ExhibitionManager.Instance.SendDataAsync(message);
+
+            //await ExhibitionManager.Instance.socket.OutputStream.WriteAsync(buffer, 0, buffer.Length);
         }
-        catch
+        catch (Exception ex)
         {
-            await DisplayAlert("Ошибка", "Произошла ошибка при отправлении данных", "ОК");
+            await DisplayAlert("Ошибка", $"Ошибка отправки данных: {ex.Message}", "ОК");
 
         }
     }
